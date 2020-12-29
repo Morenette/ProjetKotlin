@@ -7,10 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.projetkotlin.domain.entity.User
 import com.example.projetkotlin.domain.usecase.CreateUserUseCase
 import com.example.projetkotlin.domain.usecase.GetUserUseCase
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import org.koin.core.KoinApplication.Companion.init
 
 class MainViewModel(
@@ -18,16 +15,19 @@ class MainViewModel(
     private val getUserUseCase: GetUserUseCase
 ) : ViewModel () {
 
-    val counter: MutableLiveData<Int> = MutableLiveData()
+    val loginLiveData: MutableLiveData<LoginStatus> = MutableLiveData()
 
-    init {
-        counter.value = 0
-    }
-
-    fun onClickedIncrement(emailUser: String){
+    fun onClickedLogin(emailUser: String, password: String){
         viewModelScope.launch(Dispatchers.IO) {
-            createUserUseCase.invoke(User("test"))
-            val user = getUserUseCase.invoke("test")
+            val user = getUserUseCase.invoke(emailUser)
+            val loginStatus = if (user != null){
+                LoginSuccess(user.email)
+            } else {
+                LoginError
+            }
+            withContext(Dispatchers.Main){
+                loginLiveData.value = loginStatus
+            }
         }
     }
 }
