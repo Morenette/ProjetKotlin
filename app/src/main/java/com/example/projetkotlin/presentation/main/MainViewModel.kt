@@ -27,7 +27,6 @@ class MainViewModel(
     fun onClickedIncrement(emailUser: String){
         viewModelScope.launch(Dispatchers.IO) {
             createUserUseCase.invoke(User("test"))
-            delay(1000)
             val user = getUserUseCase.invoke("test")
         }
     }
