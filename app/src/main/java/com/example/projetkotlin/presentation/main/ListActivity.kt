@@ -1,9 +1,13 @@
-package com.example.projetkotlin
+package com.example.projetkotlin.presentation.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.projetkotlin.R
+import org.koin.android.ext.android.inject
 
-class MainActivity : AppCompatActivity() {
+class ListActivity : AppCompatActivity() {
+
+    val mainViewModel: MainViewModel by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
