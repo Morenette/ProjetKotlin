@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10dp"
-    tools:context=".presentation.main.MainActivity">
-
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_margin="10dp"
+    tools:context=".presentation.main.RegisterActivity">
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/login_input_layout"
+        android:id="@+id/email_register_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Login"
@@ -18,10 +17,10 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/password_input_layout">
+        app:layout_constraintBottom_toTopOf="@+id/password_register_layout">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/login_edit"
+            android:id="@+id/email_register_edit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text"
@@ -30,47 +29,34 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/password_input_layout"
+        android:id="@+id/password_register_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Password"
-        app:endIconMode="password_toggle"
-        app:layout_constraintTop_toBottomOf="@+id/login_input_layout"
+        app:layout_constraintTop_toBottomOf="@+id/email_register_layout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/login_button">
+        app:layout_constraintBottom_toTopOf="@+id/creation_button">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/password_edit"
-            android:inputType="textPassword"
+            android:id="@+id/password_register_edit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             />
 
     </com.google.android.material.textfield.TextInputLayout>
+
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/login_button"
+        android:id="@+id/creation_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@android:dimen/app_icon_size"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/password_input_layout"
-        app:layout_constraintBottom_toTopOf="@+id/create_account_button"
-        android:text="Connexion"
+        app:layout_constraintTop_toBottomOf="@+id/password_register_layout"
+        android:text="Créer"
         />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/create_account_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="Create"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_button"
-        style="?attr/materialButtonOutlinedStyle"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
