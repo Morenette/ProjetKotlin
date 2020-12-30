@@ -20,6 +20,9 @@
         <activity android:name=".presentation.main.RegisterActivity">
 
         </activity>
+        <activity android:name=".presentation.main.ListActivity">
+
+        </activity>
     </application>
 
 </manifest>
