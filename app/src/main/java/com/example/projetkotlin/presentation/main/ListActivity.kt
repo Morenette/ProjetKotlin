@@ -11,6 +11,8 @@ class ListActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.recyclerview)
+
+        data class ExampleItem(val imageResource: Int, val text1: String, val text2: String)
     }
 }
