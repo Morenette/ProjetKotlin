@@ -1,15 +1,23 @@
 package com.example.projetkotlin.presentation.main
 
-import android.app.ListActivity
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.projetkotlin.Constants
 import com.example.projetkotlin.R
+import com.example.projetkotlin.Singletons
+import com.example.projetkotlin.Singletons.gson
+import com.example.projetkotlin.presentation.model.Pokemon
+import com.example.projetkotlin.presentation.view.DetailsActivity
+import com.example.projetkotlin.presentation.view.ListAdapter
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.android.ext.android.inject
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -50,5 +58,38 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        controller = new MainController(
+                this,
+        Singletons.getGson(),
+        Singletons.getSharedPreferences(getApplicationContext())
+        );
+
+        controller.onStart();
     }
+
+    fun showList(pokemonList: List<Pokemon?>?) {
+        recyclerView = findViewById(R.id.recycler_view) as RecyclerView
+        recyclerView.setHasFixedSize(true)
+        layoutManager = LinearLayoutManager(this)
+        recyclerView.setLayoutManager(layoutManager)
+        mAdapter = ListAdapter(pokemonList, object : ListAdapter.OnItemClickListener() {
+            fun onItemClick(item: Pokemon?) {
+                controller.onItemClick(item)
+            }
+        })
+        recyclerView.setAdapter(mAdapter)
+    }
+
+    fun showError() {
+        Toast.makeText(applicationContext, "API Error", Toast.LENGTH_SHORT).show()
+    }
+
+    fun navigateToDetails(pokemon: Pokemon?) {
+        val myIntent = Intent(this@MainActivity, DetailsActivity::class.java)
+        myIntent.putExtra(Constants.POKEMON_KEY, gson!!.toJson(pokemon))
+        this@MainActivity.startActivity(myIntent)
+    }
+
 }
+
+
