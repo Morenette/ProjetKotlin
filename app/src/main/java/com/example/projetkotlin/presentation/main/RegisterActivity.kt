@@ -1,7 +1,10 @@
 package com.example.projetkotlin.presentation.main
 
+import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import com.example.projetkotlin.R
 import com.example.projetkotlin.data.local.DatabaseHelper
@@ -20,10 +23,15 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.registerpage)
 
-        handler= DatabaseHelper.(this)
+        handler= DatabaseHelper(this)
 
         creation_button.setOnClickListener {
             handler.insertUserDAta(email_register_edit.text.toString(),password_register_edit.text.toString())
+            val toast: Toast = Toast.makeText(this,"Ajouté",Toast.LENGTH_LONG)
+            toast.show()
+            val intent: Intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
         }
+
     }
 }
